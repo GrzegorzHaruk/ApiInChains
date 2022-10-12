@@ -10,13 +10,13 @@ namespace ApiInChains.SimpleDemo
 
             var result2 = ApiInChains.FromMany<User>().GetMany().OrderBy().Fetch();
 
-            var result3 = ApiInChains.FromMany<User>().GetMany().Where().Fetch();
+            var result3 = ApiInChains.FromMany<User>().GetMany().Where(x=>x.Id > 0).Fetch();
 
-            var result4 = ApiInChains.FromMany<User>().GetMany().Where().OrderBy().Fetch();
+            var result4 = ApiInChains.FromMany<User>().GetMany().Where(x => x.Id > 1).OrderBy().Fetch();
 
-            var result5 = ApiInChains.FromMany<User>().GetMany().Where().AndWhere().Fetch();
+            var result5 = ApiInChains.FromMany<User>().GetMany().Where(x => x.Id > 2).AndWhere(x=>x.Pets.Count() > 0).Fetch();
 
-            var result6 = ApiInChains.FromMany<User>().GetMany().Where().AndWhere().OrderBy().Fetch();
+            var result6 = ApiInChains.FromMany<User>().GetMany().Where(x => x.Id > 0).AndWhere(x=>x.LastName == "Does").OrderBy().Fetch();
 
             var result7 = ApiInChains.FromMany<User>().GetMany().Include().Fetch();
 
@@ -26,9 +26,9 @@ namespace ApiInChains.SimpleDemo
 
             var result11 = ApiInChains.FromMany<User>().GetMany().Include().AndInclude().OrderBy().Fetch();
 
-            var result12 = ApiInChains.FromMany<User>().GetMany().Where().Include().Fetch();
+            var result12 = ApiInChains.FromMany<User>().GetMany().Where(x => x.Id > 0).Include().Fetch();
 
-            var result13 = ApiInChains.FromMany<User>().GetMany().Where().AndWhere().Include().AndInclude().Fetch();
+            var result13 = ApiInChains.FromMany<User>().GetMany().Where(x => x.Id > 0).AndWhere(x=>x.FirstName == "Harry").Include().AndInclude().Fetch();
 
             // To do
             //var result14 = ApiInChains.FromMany<User>().GetMany().Include().Where().Fetch();

@@ -1,19 +1,30 @@
-﻿namespace ApiInChains.Grammar
+﻿using System.Linq.Expressions;
+
+namespace ApiInChains.Grammar
 {
     public class UltimateQueryBuilderMany<T> : IGetMany<T>, IWhere<T>, IAndWhere<T>, IOrderBy<T>, IInclude<T>, IAndInclude<T>, IFetch<T> where T : class
     {
+        private IQueryable<T> _query;
+
+        public UltimateQueryBuilderMany(IQueryable<T> query)
+        {
+            _query = query;
+        }
+
         public IWhere<T> GetMany()
         {
             return this;
         }
 
-        public IAndWhere<T> Where()
+        public IAndWhere<T> Where(Expression<Func<T, bool>> filter)
         {
+            _query = _query.Where(filter);
             return this;
         }
 
-        public IAndWhere<T> AndWhere()
+        public IAndWhere<T> AndWhere(Expression<Func<T, bool>> filter)
         {
+            _query = _query.Where(filter);
             return this;
         }
 
@@ -34,7 +45,7 @@
 
         public IEnumerable<T> Fetch()
         {
-            return new List<T>();
+            return _query.ToList();
         }
     }
 
@@ -45,12 +56,12 @@
 
     public interface IWhere<T> : IFetch<T>, IOrderBy<T>, IInclude<T> where T : class
     {
-        IAndWhere<T> Where();
+        IAndWhere<T> Where(Expression<Func<T, bool>> filter);
     }
 
     public interface IAndWhere<T> : IFetch<T>, IOrderBy<T>, IInclude<T> where T : class
     {
-        IAndWhere<T> AndWhere();
+        IAndWhere<T> AndWhere(Expression<Func<T, bool>> filter);
     }
 
     public interface IInclude<T> : IFetch<T>, IOrderBy<T> where T : class

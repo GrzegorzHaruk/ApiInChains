@@ -1,4 +1,5 @@
-﻿using ApiInChains.Grammar;
+﻿using ApiInChains.EfCore;
+using ApiInChains.Grammar;
 
 namespace ApiInChains
 {
@@ -6,7 +7,9 @@ namespace ApiInChains
     {
         public static IGetMany<T> FromMany<T>() where T : class
         {
-            return new UltimateQueryBuilderMany<T>();
+            AppDbContext dbContext = new AppDbContext();
+            IQueryable<T> query = dbContext.Set<T>().AsQueryable();
+            return new UltimateQueryBuilderMany<T>(query);
         }
     }
 }

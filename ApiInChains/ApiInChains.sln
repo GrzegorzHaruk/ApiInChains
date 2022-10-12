@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiInChains.Tests", "ApiInC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiInChains.Web", "ApiInChains.Web\ApiInChains.Web.csproj", "{1139E2A1-B469-4933-B96B-4564092393AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiInChains.SimpleDemo", "ApiInChains.SimpleDemo\ApiInChains.SimpleDemo.csproj", "{F3B798D2-242D-45E2-8A26-F7D68CBE538A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiInChains.SimpleDemo", "ApiInChains.SimpleDemo\ApiInChains.SimpleDemo.csproj", "{F3B798D2-242D-45E2-8A26-F7D68CBE538A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Linq.Dynamic.Core;
 
 namespace ApiInChains.Grammar
 {
@@ -38,8 +39,17 @@ namespace ApiInChains.Grammar
             return this;
         }
 
-        public IFetch<T> OrderBy()
+        public IFetch<T> OrderBy(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
         {
+            _query = orderBy(_query).AsQueryable();
+
+            return this;
+        }
+
+        public IFetch<T> OrderBy(string orderBy)
+        {
+            _query = _query.OrderBy(orderBy);
+
             return this;
         }
 
@@ -76,7 +86,8 @@ namespace ApiInChains.Grammar
 
     public interface IOrderBy<T> where T : class
     {
-        IFetch<T> OrderBy();
+        IFetch<T> OrderBy(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy);
+        IFetch<T> OrderBy(string orderBy);
     }
 
     public interface IFetch<T> where T : class
